@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/logs")
+@RequestMapping(path = "/logs")
 public class LogsController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(LogsController.class);
-    @Value("${servico.url1:http://localhost:8082}")
+
+    @Value("${servico.url2:}")
     private String urlSistema2;
 
 
@@ -33,7 +34,7 @@ public class LogsController {
             final String mensagemDeles = restTemplate.exchange(urlSistema2, HttpMethod.GET, null, new ParameterizedTypeReference<String>() {
             }).getBody();
 
-            return "Eu disse isso: " + mensagem + " e eles disseram isso: (" + mensagemDeles + ")";
+            return("Eu disse isso: " + mensagem + " e eles disseram isso: (" + mensagemDeles + ")");
         }
 
         return "E eu deveria parar aqui";
