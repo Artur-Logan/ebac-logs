@@ -17,7 +17,7 @@ public class LogsController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(LogsController.class);
 
-    @Value("${servico.url2:}")
+    @Value("${servico2.url:}")
     private String urlSistema2;
 
 
@@ -29,6 +29,8 @@ public class LogsController {
         final double mensagem = Math.random();
 
         LOGGER.info("Gerei uma mensagem {}", mensagem);
+
+        LOGGER.info(urlSistema2);
 
         if (urlSistema2.length() > 0){
             final String mensagemDeles = restTemplate.exchange(urlSistema2, HttpMethod.GET, null, new ParameterizedTypeReference<String>() {
